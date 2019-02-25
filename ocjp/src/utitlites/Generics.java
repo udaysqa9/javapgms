@@ -2,7 +2,10 @@ package utitlites;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+import java.util.Scanner;
 
 import org.apache.commons.compress.compressors.FileNameUtil;
 
@@ -19,7 +22,7 @@ public class Generics {
 		for(File f : lof) {
 			files+=" "+f.getName();
 		}
-		
+
 		return files;
 
 	}
@@ -41,5 +44,68 @@ public class Generics {
 		return hmap;
 	}
 
+	public static int findDifference(int a, int b) {
+		int diff=0;
+		if(a>b) {
+			diff=a-b;
+		}
+		else {
+			diff = b-a;
+		}
+		return diff;
+	}
+
+	public static int[] sortIntArray(int arr[]) {
+		int temp;
+		for(int i=0;i<arr.length;i++) {
+			for(int j=i+1;j<arr.length;j++) {
+				if(arr[i]>arr[j]) {
+					temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
+				}
+
+			}
+		}
+
+		return arr;
+
+	}
+
+	public static void startGame() {
+		ArrayList<Integer> al = new ArrayList<>();
+		System.out.println("Guess a Number from 1-100");
+		Scanner sn = new Scanner(System.in);
+		int gn=sn.nextInt();
+		int attempt=2;
+		al.add(gn);
+		Random rdn = new Random();
+		int randomNum=rdn.nextInt(100);
+		while(gn!=randomNum && attempt<=10){
+			attempt++;
+			System.out.println("PREVIOUS GUESSES: "+al);
+			System.out.println(randomNum);
+			if(findDifference(gn,randomNum)>20) {
+				System.out.println("Wrong !! Last Guess was too low!");
+			}
+			else {
+				System.out.println("Wrong !! Last Guess was too high");
+
+			}
+			System.out.println("Guess a Number from 1-100");
+			sn = new Scanner(System.in);
+			gn=sn.nextInt();
+			al.add(gn);
+		}
+		if(gn==randomNum && attempt<=10) {
+			System.out.println("PREVIOUS GUESSES: "+al);
+			System.out.println("Congratulations !! You have guessED the correct number!!");
+		}
+		else if(attempt >= 10) {
+			System.out.println("PREVIOUS GUESSES: "+al);
+			System.out.println("New Game Started!!");
+			startGame();
+		}
+	}
 
 }
