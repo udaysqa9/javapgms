@@ -72,6 +72,32 @@ public class Generics {
 
 	}
 
+	public static String getReverseWithSpchars(char[] a) {
+		String revStr="";
+		int l = 0;
+		int r = a.length-1;
+		while(l<r) {
+			if(!Character.isAlphabetic(a[l])) {
+				l++;
+			}
+			else if(!Character.isAlphabetic(a[r])) {
+				r--;
+			}
+			else {
+				char temp = a[l];
+				a[l]=a[r];
+				a[r]=temp;
+				l++;
+				r--;
+			}
+		}
+		
+		revStr = new String(a);
+
+		
+		return revStr;	
+	}
+
 	public static void startGame() {
 		ArrayList<Integer> al = new ArrayList<>();
 		System.out.println("Guess a Number from 1-100");
