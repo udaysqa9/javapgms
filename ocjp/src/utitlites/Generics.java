@@ -26,7 +26,11 @@ public class Generics {
 		return files;
 
 	}
-
+/**
+ * 
+ * @param fileNames
+ * @return String of fileNames
+ */
 	public static HashMap<String,Integer>  getFileExtensions(String fileNames) {
 
 		HashMap<String,Integer> hmap = new HashMap<String,Integer>();
